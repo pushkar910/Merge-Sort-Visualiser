@@ -21,21 +21,35 @@ function doMerge(mainArray, startIndx, mid, endIndx, auxArray, animations) {
   let j = mid + 1;
 
   while (i <= mid && j <= endIndx) {
+    // These are the values that we're comparing; we push them once
+    // to change their color.
     animations.push([i, j]);
+    // These are the values that we're comparing; we push them a second
+    // time to revert their color.
     animations.push([i, j]);
 
     if (auxArray[i] <= auxArray[j]) {
+      // We overwrite the value at index k in the original array with the
+      // value at index i in the auxiliary array.
       animations.push([k, auxArray[i]]);
       mainArray[k++] = auxArray[i++];
     } else {
+      / We overwrite the value at index k in the original array with the
+      // value at index j in the auxiliary array.
       animations.push([k, auxArray[j]]);
       mainArray[k++] = auxArray[j++];
     }
   }
 
   while (i <= mid) {
+    // These are the values that we're comparing; we push them once
+    // to change their color.
     animations.push([i, i]);
+    // We overwrite the value at index k in the original array with the
+    // value at index i in the auxiliary array.
     animations.push([i, i]);
+    // We overwrite the value at index k in the original array with the
+    // value at index i in the auxiliary array.
     animations.push([k, auxArray[i]]);
     mainArray[k++] = auxArray[i++];
   }
